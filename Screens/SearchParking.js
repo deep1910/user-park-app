@@ -1,6 +1,6 @@
 import { View, Text, TextInput } from 'react-native'
-import React, { useEffect } from 'react'
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps'
+import React, { useEffect, useState } from 'react'
+import MapView, {Marker, PROVIDER_GOOGLE, Callout} from 'react-native-maps'
 
 import { collection, addDoc, doc , onSnapshot ,getDocs} from "firebase/firestore";
 // import { collection, getDocs } from "firebase/firestore";
@@ -9,12 +9,22 @@ import {db} from '../firebaseConfig';
 
 const citiesCollectionRef = collection(db, "names");
 
+ 
+
+// const coord = [];
 
 
 const SearchParking = () => {
+  const [markercoord, setMarkercoord] = useState([]);
+  //  const [markercoord = []
+  //  const [ismarkers, setIsmarkers] = useState(false);
+  //  let coordlen = 0;
 
   useEffect(() => {
       
+
+ 
+
     async function fetchData() {
     const querySnapshot = await getDocs(citiesCollectionRef);
   
@@ -22,23 +32,42 @@ const SearchParking = () => {
       id: doc.id,
       ...doc.data()
   }));
-  console.log(cities.length);
+  // console.log("got len");
+  // coordlen = cities.length;
+  //  console.log(coordlen);
+  setMarkercoord(cities);
+//    cities.forEach((city)=> {
+ 
+//      const coordinates = Object.values(city.parkcoord)
+//     //  console.log(coordinates);
+
+//     //  markercoord.push(coordinates[0]);
+//     setMarkercoord(coordinates[0]);
+//     //  coord.push(coordinates);
+   
+//     //  console.log(markercoord);
+//     //  console.log(coord);
+
 
 }
-fetchData()
-},[])
+fetchData();
+// console.log(markercoord);
+// console.log(markercoord.length);
+// console.log(coordlen);
+
+}
+
+  ,[])
+
+
+
 
   return (
     <View>
        <View style={{borderWidth:1 ,padding:10, backgroundColor:'skyblue'}}>
         <TextInput placeholder='Search Location' style={{ backgroundColor: '#DCC1BC', padding:10, fontSize:20}}/>
          </View>
-      {/* <MapView style={{height:'90%', width:'100%'}} >
-         
-     
-
-      </MapView> */}
-
+  
 
       <MapView
         userInterfaceStyle='dark'
@@ -49,7 +78,7 @@ fetchData()
         maxZoomLevel={20}
         // minZoomLevel={10}
         provider={PROVIDER_GOOGLE}
-      
+        showsUserLocation={true}
         initialRegion={{
           latitude: 20.77940,
           longitude: 76.67873,
@@ -58,17 +87,31 @@ fetchData()
         }}>
 
 
+       { markercoord.map((coordinate, index) => {
+         console.log("MARKER", coordinate.parkcoord[0][0], coordinate.parkcoord[0][1]);
+         return <Marker
+          // title={coordinate.parkname}
+          // anchor={{x:0.5, y:2}}
+          description='Address: 1234, XYZ Street, ABC City, 123456\n\nPrice: $10/hour'
+          key={ coordinate.id}
+          coordinate={{ latitude: coordinate.parkcoord[0][1], longitude: coordinate.parkcoord[0][0] }}
+          title="Ground Parking"
+          
+
+        >
+           <Callout >
+          
+            <Text>{coordinate.parkname}</Text>
+        <Text>{coordinate.address}</Text>
+        <Text>Pricing: Rs.{coordinate.pricing}/hr </Text>
+        <Text>Availability:</Text>
        
-        
-       
-        <Marker
-          coordinate={{ latitude: 20.77940, longitude: 76.67873 }}
-          title="My Location"
-        />
-  
+      </Callout>
+        </Marker>
+
+       })}
 
 
-  
       </MapView>
     </View>
   )
