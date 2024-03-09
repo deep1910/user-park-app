@@ -30,7 +30,7 @@ const Account = () => {
       {/* <Text>Account</Text> */}
     
 
-     <TouchableOpacity style={{display:'flex', flexDirection:'row', alignItems:'center' , gap:10}}  onPress={() => setEditProfile(!editProfile)}>
+     <TouchableOpacity style={{display:'flex',margin:30,marginBottom:200, flexDirection:'row', alignItems:'center' , gap:10}}  onPress={() => setEditProfile(!editProfile)}>
          
 
      <Text style={{fontSize:20}}>Edit Profile</Text>
@@ -40,8 +40,8 @@ const Account = () => {
 
 {editProfile && <Profile/>}
 
-<TouchableOpacity onPress={handleLogout}>
-       <Text style={{fontSize:20, marginHorizontal:100, borderWidth:1, padding:10, width:130}}>Logout</Text>  
+<TouchableOpacity  style={{position:'absolute', top:400, left:30,}} onPress={handleLogout}>
+       <Text style={{fontSize:20, borderWidth:1, padding:15, width:100, borderRadius:10}}>Logout</Text>  
     </TouchableOpacity>  
    
 

@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 // import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-
+import { getDatabase } from "firebase/database";
 // import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 // import { getAnalytics } from "firebase/analytics";
@@ -31,3 +31,4 @@ export const db = getFirestore(app);
 
 export default app;
 
+export const database = getDatabase(app);

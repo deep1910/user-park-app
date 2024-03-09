@@ -32,21 +32,9 @@ const SearchParking = () => {
       id: doc.id,
       ...doc.data()
   }));
-  // console.log("got len");
-  // coordlen = cities.length;
-  //  console.log(coordlen);
-  setMarkercoord(cities);
-//    cities.forEach((city)=> {
- 
-//      const coordinates = Object.values(city.parkcoord)
-//     //  console.log(coordinates);
 
-//     //  markercoord.push(coordinates[0]);
-//     setMarkercoord(coordinates[0]);
-//     //  coord.push(coordinates);
-   
-//     //  console.log(markercoord);
-//     //  console.log(coord);
+  setMarkercoord(cities);
+
 
 
 }
@@ -64,7 +52,7 @@ fetchData();
 
   return (
     <View>
-       <View style={{borderWidth:1 ,padding:10, backgroundColor:'skyblue'}}>
+       <View style={{borderWidth:1,  }}>
         <TextInput placeholder='Search Location' style={{ backgroundColor: '#DCC1BC', padding:10, fontSize:20}}/>
          </View>
   
@@ -73,7 +61,7 @@ fetchData();
         userInterfaceStyle='dark'
         // mapType='hybrid'
         mapType='standard'
-        style={{height:'90%', width:'100%'}}
+        style={{height:630, width:'100%'}}
         showsCompass={true}
         maxZoomLevel={20}
         // minZoomLevel={10}

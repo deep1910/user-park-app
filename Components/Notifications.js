@@ -3,8 +3,8 @@ import React from 'react'
 
 const Notifications = () => {
   return (
-    <View>
-      <Text>Notifications</Text>
+    <View style={{margin:40}}>
+      <Text style={{fontSize:30}}>Notifications</Text>
     </View>
   )
 }

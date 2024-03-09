@@ -45,7 +45,10 @@ import LoginScreen from './Screens/LoginScreen';
 export default function App() {
   const Drawer = createDrawerNavigator();
   const [auth,setAuth] = useState(false);
-  
+  const [userdetail , setUserdetail] = useState(null);
+
+
+
 useEffect(() => {
   checkAuthenticate();
 }, [auth]);
@@ -56,6 +59,7 @@ useEffect(() => {
     if (await client.isAuthenticated) {
       const userProfile = await client.getUserDetails();
       console.log(userProfile); 
+      setUserdetail(userProfile);
       setAuth(true);
         // Need to implement, e.g: call an api, etc...
     } else {
@@ -69,12 +73,12 @@ useEffect(() => {
   return (
     <AuthContext.Provider value={{auth,setAuth}}>
     <NavigationContainer>
-    {auth ?<Drawer.Navigator>
+    {auth ?<Drawer.Navigator  >
       
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Search Parkings" component={SearchParking} />
-      <Drawer.Screen name="My Parkings" component={Parkings} />
-      <Drawer.Screen name="Vehices" component={Vehicles} />
+      <Drawer.Screen name="My Parkings" component={Parkings}  />
+      <Drawer.Screen name="Vehices" component={Vehicles} initialParams={{userdetail: userdetail}}/>
       <Drawer.Screen name="Settings" component={Settings} />
       
     </Drawer.Navigator>: 

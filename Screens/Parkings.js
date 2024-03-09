@@ -7,8 +7,11 @@ import SearchParking from './SearchParking';
 const Tab = createMaterialTopTabNavigator();
 
 const Parkings = () => {
+  // const {userdetail} = route.params;
+  // console.log("userdetails" ,userdetail);
+  // console.log(route.params);
   return (
-  
+     
     <Text>History</Text>
   )
 }

@@ -6,8 +6,9 @@ import React from 'react'
 const Home = () => {
   return (
 
-    <View style={{}}>
-       <Text>Home</Text>
+    <View style={{padding:20}}>
+       <Text style={{fontSize:40}}>User Parking Reservation App </Text>
+       <Text style={{fontSize:40}}>(In Development) </Text>
     </View>
 
   )
