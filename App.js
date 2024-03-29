@@ -76,9 +76,9 @@ useEffect(() => {
     {auth ?<Drawer.Navigator  >
       
       <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Search Parkings" component={SearchParking} />
+      <Drawer.Screen name="Search Parkings" component={SearchParking} initialParams={{userdetail: userdetail}} />
       <Drawer.Screen name="My Parkings" component={Parkings}  />
-      <Drawer.Screen name="Vehices" component={Vehicles} initialParams={{userdetail: userdetail}}/>
+      <Drawer.Screen name="Vehicles" component={Vehicles} initialParams={{userdetail: userdetail}}/>
       <Drawer.Screen name="Settings" component={Settings} />
       
     </Drawer.Navigator>: 

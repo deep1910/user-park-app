@@ -7,13 +7,15 @@ import { database } from '../firebaseConfig';
 // import { onValue } from 'firebase/database';
 import { client } from '../Constants/KindeConfig';
 
-const Vehicles = ({route}) => {
+const Vehicles = ({route, navigation}) => {
     
+    const [track , setTrack ] = useState(false)
+    const [dataelement, setDataelement] = useState({});
     // console.log(route.params);
     const {userdetail} = route.params;
     console.log(userdetail);
    // const [userdetail,setUserDetail]  = useState(null);
-    const [auth , setAuth] = useState(false)
+    // const [auth , setAuth] = useState(false)
 
     // const db = getDatabase();
     useEffect(()=>{
@@ -24,10 +26,32 @@ const Vehicles = ({route}) => {
                
         onValue(dbRef, (snapshot) => {
             const data = snapshot.val();
-            console.log(data);
+            // console.log(data);
+            setDataelement(data)
+         
         })
+
+        
+// console.log(dataelement);
     }, [])
     
+
+    
+//    useEffect(() => {
+//     const starcountRef = ref(db, 'devicelocations/');
+//     onValue(starcountRef, (snapshot) => {
+//       const data = snapshot.val();
+//       const newPosts = Object.keys(data).map((key) => ({
+//             id:key,
+//             ...data[key],
+//       }))
+//      //  console.log(data);
+//       setfetchData(newPosts);
+//      //  console.log(newPosts);
+//      //  console.log(newPosts[0].id);
+//      //  console.log(newPosts[0].latitude);
+//     })
+//   }, [])
 
    
 
@@ -146,10 +170,37 @@ const Vehicles = ({route}) => {
 //     </View>
 //   )
 
+const trackvehicle = () => {
+    console.log("button tap");
+    setTrack(true)
+    navigation.navigate('Search Parkings', {track: track})
+}
+
+
 return (
-   <View>
-    <Text style={{ fontSize: 20, marginBottom: 20 }} >Select VEhicle </Text>
-   </View>
+  <View>
+    {/* <Text>{userdetail.id}</Text> */}
+    <View style={{margin:30}}>
+    {/* <Text style={{ fontSize: 20, marginBottom: 20 }} >Select Vehicle : </Text> */}
+    <View style={{backgroundColor:'#cbfafa', padding:20}}> 
+    <Text style={{fontSize:20}}>Vehicle Name : { dataelement.vehiclename} </Text>
+    <Text style={{fontSize:20}}>Vehicle Type : { dataelement.vehicletype} </Text>
+    <Text style={{fontSize:20}}>Vehicle License Number : { dataelement.license} </Text>
+    </View>
+
+    </View>
+   
+    {/* <Text>"LOcation", {dataelement.location.coords.latitude} , {dataelement.location.coords.longitude}</Text>
+    <Text>"Accuracy", {dataelement.location.coords.accuracy}</Text> */}
+     {/* <TouchableOpacity style={{backgroundColor:'green', padding:20,margin:30, width:200, }} onPress={()=> {navigation.navigate('Search Parkings', {track: track, location: dataelement})}}> */}
+          <TouchableOpacity style={{backgroundColor:'#d3c5f6',borderRadius:40, padding:20,margin:30, width:200, }} onPress={()=> trackvehicle()}>
+
+        <Text style={{fontSize:25}}>Track vehicles</Text>
+     </TouchableOpacity>
+     </View>
+  
+   
+   
 )
 
 }

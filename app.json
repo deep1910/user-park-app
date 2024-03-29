@@ -1,6 +1,19 @@
 {
   "expo": {
     "name": "my-app",
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./local/assets/notification-icon.png",
+          "color": "#ffffff",
+          "sounds": [
+            "./local/assets/notification-sound.wav",
+            "./local/assets/notification-sound-other.wav"
+          ]
+        }
+      ]
+    ],
     "slug": "my-app",
     "version": "1.0.0",
     "orientation": "portrait",
